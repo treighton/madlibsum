@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title></title>
+    <style></style>
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="text-center"></div>
+      <h1 id="head">I am random ipsum</h1>
+      <div class="form">
+        <div class="group">
+          <input type="text" placeholder="enter a phrase..." class="phrase" />
+          <button class="addAnother">+</button>
+        </div>
+      </div>
+
+      <button id="click">Generate</button>
+
+      <h2>OUTPUT:</h2>
+      <div class="output"></div>
+    </div>
+  </body>
+  <script>
+    const phrases = [
+      "Oh God damnit, this fucking thing.",
+      "It's all ass backwards if you ask me.",
+      "Where did I put my glasses, oh here they are, on my face.",
+      "Do you want some chamomile tea?",
+      "I'm going to go to target later, would you like to come with me?",
+      "Nar.",
+      "I can't wait to eat more almond butter.",
+      "Something is off, I don't think I can lift this much weight. Maybe I'm tired.",
+      "My sister is calling me, again."
+    ];
+
+    const addInput = target => {
+      const div = document.createElement(`div`);
+      const input = document.createElement(`input`);
+      div.appendChild(input);
+      target.appendChild(div);
+    };
+
+    document.querySelector(".form").addEventListener("click", e => {
+      if (e.target.classList.contains("addAnother")) {
+        addInput(document.querySelector(".form"));
+      }
+    });
+
+    const generator = (arr, target) => {
+      const paragraph = [];
+      for (let i = 0; i < 5; i++) {
+        const rand = Math.floor(Math.random() * arr.length);
+        paragraph.push(arr[rand]);
+      }
+
+      target.innerHTML = paragraph.join(" ");
+    };
+
+    document.querySelector("#click").addEventListener("click", e => {
+      const target = document.querySelector(".output");
+      let newArr = [];
+      document
+        .querySelectorAll("input")
+        .forEach(thing => newArr.push(thing.value));
+      generator(newArr, target);
+    });
+  </script>
+</html>
